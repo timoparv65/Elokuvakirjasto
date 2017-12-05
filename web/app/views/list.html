@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<a href="#/movies/new"><b>Anna uusi elokuva</b></a><br>
+<h1>Elokuvat</h1>
+<dir ng-repeat="movie in listMovies()">
+    <label>Nimi: {{movie.name}}</label><br>
+    <label>Ohjaaja: {{movie.director}}</label><br>
+    <label>Julkaisuvuosi: {{movie.published}}</label><br>
+    <label>Kuvaus: {{movie.description}}</label><br>
+    <label>ID: {{movie.$id}}</label>
+</dir>
