@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<label><b>Muokkaa elokuvan tietoja</b></label>
+<form novalidate name="movieForm">
+    <p>
+      <label>Nimi</label>
+      <input type="text" ng-model="movie.name" name="uMovieName" required ng-minlength="2"><br>
+      <div ng-show="movieForm.uMovieName.$invalid && movieForm.uMovieName.$dirty">
+        Anna elokuvan nimi.
+      </div>
+    </p>
+    <p>
+    <label>Ohjaaja</label>
+      <input type="text" ng-model="movie.director" name="uMovieDirector" required ng-pattern="/^\D{2,}$/"><br>
+      <div ng-show="movieForm.uMovieDirector.$invalid && movieForm.uMovieDirector.$dirty">
+        Anna elokuvan ohjaajan nimi.
+      </div>
+    </p>
+    <p>
+      <label>Julkaisuvuosi</label>
+      <input type="number" ng-model="movie.released" name="uMoviePublished" required ng-pattern="/^[12]\d{3}$/"><br>
+      <div ng-show="movieForm.uMoviePublished.$invalid && movieForm.uMoviePublished.$dirty">
+        Anna elokuvan julkaisuvuosi.
+      </div>
+    </p>
+    <p>
+      <label>Kuvaus</label>
+      <input type="text" ng-model="movie.description" name="uMovieDescription" required ng-minlength="2"><br>
+      <div ng-show="movieForm.uMovieDescription.$invalid && movieForm.uMovieDescription.$dirty">
+        Anna elokuvan kuvaus.
+      </div>
+    </p>
+    <input type="submit" ng-click="editMovie(movie)" value="Tallenna" ng-disabled="movieForm.$invalid">
+</form>
