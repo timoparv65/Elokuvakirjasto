@@ -16,19 +16,22 @@ describe('AddMovieController', function(){
                   name: 'Pekka Puupää',
                   director: 'Armas Lohikoski',
                   released: '1953',
-                  description: 'Sarjan ensimmäinen elokuva'
+                  description: 'Sarjan ensimmäinen elokuva',
+                  $id: 'abc123'
                 },
                 {
                   name: 'Pekka ja Pätkä neekereinä',
                   director: 'Armas Lohikoski',
                   released: '1960',
-                  description: 'Sarjan viimeinen elokuva'
+                  description: 'Sarjan viimeinen elokuva',
+                  $id: 'def456'
                 },
                 {
                   name: 'Pekka ja Pätkä Suezilla',
                   director: 'Armas Lohikoski',
                   released: '1958',
-                  description: 'Rauhanturvaamistehtävissä'
+                  description: 'Rauhanturvaamistehtävissä',
+                  $id: 'ghi789'
                 }
               ];
 

@@ -14,7 +14,9 @@ module.exports = function(config){
       //'test/*.js' alkuperäinen
       'web/app/controllers/*.js', // lisätty
       'test/add_movie_test.js', // lisätty
-      'test/movie_list_test.js' // lisätty
+      'test/movie_list_test.js', // lisätty
+      'test/show_movie_test.js', // lisätty (tehtävä 44)
+      'test/edit_movie_test.js' // lisätty (tehtävä 44)
     ],
 
     autoWatch : true,

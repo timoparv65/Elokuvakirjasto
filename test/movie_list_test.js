@@ -16,19 +16,22 @@ describe('ListMovieController', function(){
                   name: 'Pekka Puupää',
                   director: 'Armas Lohikoski',
                   released: '1953',
-                  description: 'Sarjan ensimmäinen elokuva'
+                  description: 'Sarjan ensimmäinen elokuva',
+                  $id: 'abc123'
                 },
                 {
                   name: 'Pekka ja Pätkä neekereinä',
                   director: 'Armas Lohikoski',
                   released: '1960',
-                  description: 'Sarjan viimeinen elokuva'
+                  description: 'Sarjan viimeinen elokuva',
+                  $id: 'def456'
                 },
                 {
                   name: 'Pekka ja Pätkä Suezilla',
                   director: 'Armas Lohikoski',
                   released: '1958',
-                  description: 'Rauhanturvaamistehtävissä'
+                  description: 'Rauhanturvaamistehtävissä',
+                  $id: 'ghi789'
                 }
               ];
 
@@ -42,6 +45,19 @@ describe('ListMovieController', function(){
                           },
                         getMovies: function(){
                             return movies;
+                        },
+                        removeMovie: function(movie){ // lisätty, tehtävä 44
+                            var key = movie.$id;
+                            var index = -1;
+                            for (var i = 0; i < movies.length; i++){
+                                if (key === movies[i].$id){
+                                    index = i;
+                                    break;
+                                }
+                            }
+                            if (index !== -1){
+                                movies.splice(index, 1);
+                            }
                         }
                     }
                 })();
@@ -49,16 +65,17 @@ describe('ListMovieController', function(){
             // Lisää vakoilijat
 	    // spyOn(FirebaseServiceMock, 'jokuFunktio').and.callThrough(); // alkuperäinen
             spyOn(FirebaseServiceMock, 'getMovies').and.callThrough();
+            spyOn(FirebaseServiceMock, 'removeMovie').and.callThrough(); // tehtävä 44
 
             // Injektoi toteuttamasi kontrolleri tähän
 	    inject(function($controller, $rootScope) {
-	      scope = $rootScope.$new();
-	      // Muista vaihtaa oikea kontrollerin nimi!
-	      //controller = $controller('MyAwesomeController', { // alkuperäinen
-              controller = $controller('ListMovieController', { // omaa koodia
-	        $scope: scope,
-	        FirebaseService: FirebaseServiceMock
-	      });
+                scope = $rootScope.$new();
+                // Muista vaihtaa oikea kontrollerin nimi!
+                //controller = $controller('MyAwesomeController', { // alkuperäinen
+                controller = $controller('ListMovieController', { // omaa koodia
+                  $scope: scope,
+                  FirebaseService: FirebaseServiceMock
+                });
 	    });
   	});
 
@@ -72,17 +89,36 @@ describe('ListMovieController', function(){
   	* käyttämällä toBeCalled-oletusta.
   	*/ 
 	it('should list all movies from the Firebase', function(){
-		//expect(true).toBe(false); // alkuperäinen
-                var movieList = scope.listMovies();
-                // Kutsutaan toHaveBeenCalled-funktiota, jolloin oletamme, että ggetMovies funktiota on kutsuttu
-                expect(FirebaseServiceMock.getMovies).toHaveBeenCalled();
-                var moviesFirebase = FirebaseServiceMock.getMovies();
-                for (i = 0; i < movieList.length; i++){
-                    expect(movieList[i].name).toBe(moviesFirebase[i].name);
-                    expect(movieList[i].director).toBe(moviesFirebase[i].director);
-                    expect(movieList[i].released).toBe(moviesFirebase[i].released);
-                    expect(movieList[i].description).toBe(moviesFirebase[i].description);
+            //expect(true).toBe(false); // alkuperäinen
+            var movieList = scope.listMovies();
+            // Kutsutaan toHaveBeenCalled-funktiota, jolloin oletamme, että getMovies funktiota on kutsuttu
+            expect(FirebaseServiceMock.getMovies).toHaveBeenCalled();
+            var movies = [
+                {
+                  name: 'Pekka Puupää',
+                  director: 'Armas Lohikoski',
+                  released: '1953',
+                  description: 'Sarjan ensimmäinen elokuva',
+                  $id: 'abc123'
+                },
+                {
+                  name: 'Pekka ja Pätkä neekereinä',
+                  director: 'Armas Lohikoski',
+                  released: '1960',
+                  description: 'Sarjan viimeinen elokuva',
+                  $id: 'def456'
+                },
+                {
+                  name: 'Pekka ja Pätkä Suezilla',
+                  director: 'Armas Lohikoski',
+                  released: '1958',
+                  description: 'Rauhanturvaamistehtävissä',
+                  $id: 'ghi789'
                 }
+            ];
+            for (i = 0; i < movieList.length; i++){
+                expect(movieList[i].$id).toBe(movies[i].$id);
+            }
 	});
 
 	/* 
@@ -91,7 +127,17 @@ describe('ListMovieController', function(){
   	* käyttämällä toBeCalled-oletusta.
 	*/
 	it('should be able to remove a movie', function(){
-		//expect(true).toBe(false); // alkuperäinen
-                expect(true).toBe(true);
+            //expect(true).toBe(false); // alkuperäinen
+            var movieList = scope.listMovies();
+            expect(movieList.length).toBe(3);
+            var movie0 = movieList[0];
+            scope.removeMovie(movie0);
+            // Kutsutaan toHaveBeenCalled-funktiota, jolloin oletamme, että removeMovie funktiota on kutsuttu
+            expect(FirebaseServiceMock.removeMovie).toHaveBeenCalled();
+            var movieList = scope.listMovies();
+            expect(movieList.length).toBe(2);
+            for (var i = 0; i < movieList.length; i++){
+                expect(movieList[i].$id).not.toBe(movie0.$id);
+            }
 	});
 });

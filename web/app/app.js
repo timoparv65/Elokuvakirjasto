@@ -13,7 +13,15 @@ MovieLibraryApp.config(function($routeProvider){
         })
         .when('/movies/new', {
             controller: 'AddMovieController',
-            templateUrl: 'app/views/form.html'
+            templateUrl: 'app/views/addForm.html'
+        })
+        .when('/movies/:key', { // Tehtävä 44
+            controller: 'ShowMovieController',
+            templateUrl: 'app/views/show.html'
+        })
+        .when('/movies/:key/edit', { // Tehtävä 44
+            controller: 'EditMovieController',
+            templateUrl: 'app/views/editForm.html'
         })
         .otherwise({
             redirectTo: '/'
