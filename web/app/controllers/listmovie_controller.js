@@ -7,12 +7,12 @@ MovieLibraryApp.controller('ListMovieController', function($scope, FirebaseServi
     $scope.movies = FirebaseService.getMovies();
     
     $scope.listMovies = function(){
-        //console.log("ListMovieController/listMovies");
+        console.log("ListMovieController/listMovies");
         return $scope.movies;
     };
     
     $scope.removeMovie = function(movie){
-        //console.log("ListMovieController/removeMovie");
+        console.log("ListMovieController/removeMovie");
         FirebaseService.removeMovie(movie);
     };
 });

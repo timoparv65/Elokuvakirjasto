@@ -5,17 +5,17 @@
  */
 MovieLibraryApp.controller('ShowMovieController', function($scope, FirebaseService, $routeParams, $location){
     FirebaseService.getMovie($routeParams.key, function(movie){
-        //console.log("ShowMovieController/FirebaseService.getMovie");
+        console.log("ShowMovieController/FirebaseService.getMovie");
         $scope.movie = movie;
     });
     
     $scope.showMovie = function(){
-        //console.log("ShowMovieController/showMovie");
+        console.log("ShowMovieController/showMovie");
         return $scope.movie;
     };
     
     $scope.editMovie = function(){
-        //console.log("ShowMovieController/editMovie");
+        console.log("ShowMovieController/editMovie");
         var path = '/movies/'.concat($routeParams.key).concat('/edit');
         $location.path(path);
     };
