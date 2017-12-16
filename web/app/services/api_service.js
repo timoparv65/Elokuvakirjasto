@@ -7,7 +7,7 @@ MovieLibraryApp.service('APIService', function($http){
     // Tehtävä 45
     //console.log("APIService");
     
-    var OMDB_BASE = 'http://www.omdbapi.com/?i=tt3896198&apikey=86345ac';
+    var OMDB_BASE = 'https://www.omdbapi.com/?i=tt3896198&apikey=86345ac';
     
     this.findMovie = function(name, release){
         //console.log("APIService/findMovie");
