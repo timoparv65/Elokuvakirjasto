@@ -13,32 +13,32 @@ MovieLibraryApp.service('FirebaseService', function($firebaseArray){
     var movies = $firebaseArray(firebaseRef);
     
     this.getMovies = function(){
-        console.log("FirebaseService/getMovies");
+        //console.log("FirebaseService/getMovies");
         return movies;
     };
     
     this.addMovie = function(movie){
-        console.log("FirebaseService/addMovie");
+        //console.log("FirebaseService/addMovie");
         movies.$add(movie);
     };
     
     // Tehtävä 44
     this.getMovie = function(key, done){
         movies.$loaded(function(){
-            console.log("FirebaseService/getMovie: loaded");
+            //console.log("FirebaseService/getMovie: loaded");
             done(movies.$getRecord(key));
         });
     };
     
     // Tehtävä 44
     this.editMovie = function(movie){
-        console.log("FirebaseService/editMovie");
+        //console.log("FirebaseService/editMovie");
         movies.$save(movie);
     };
     
     // Tehtävä 44
     this.removeMovie = function(movie){
-        console.log("FirebaseService/removeMovie");
+        //console.log("FirebaseService/removeMovie");
         movies.$remove(movie);
     };
 });

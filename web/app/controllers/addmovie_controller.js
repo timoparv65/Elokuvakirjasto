@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 MovieLibraryApp.controller('AddMovieController', function($scope, FirebaseService, $routeParams, $location){
+    //console.log("AddMovieController");
     $scope.addMovie = function(movie){
-        console.log("AddMovieController/addMovie");
+        //console.log("AddMovieController/addMovie");
         var movieJson = {
             name: movie.name,
             director: movie.director,

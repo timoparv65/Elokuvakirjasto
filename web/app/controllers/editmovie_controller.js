@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 MovieLibraryApp.controller('EditMovieController', function($scope, FirebaseService, $routeParams, $location){
+    //console.log("EditMovieController");
     FirebaseService.getMovie($routeParams.key, function(movie){
-        console.log("EditMovieController/FirebaseService.getMovie");
+        //console.log("EditMovieController/FirebaseService.getMovie");
         $scope.movie = movie;
     });
     
     $scope.editMovie = function(movie){
-        console.log("EditMovieController/EditMovie");
+        //console.log("EditMovieController/EditMovie");
         
         var toBeAdded = (movie.name !== undefined) && (movie.director !== undefined) && (movie.released !== undefined) && (movie.description !== undefined);
         if (toBeAdded){

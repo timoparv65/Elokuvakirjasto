@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<a href="#/movies"><b>Palaa etusivulle</b></a><br><br>
+<label><b>Anna IMDb:stä etsittävän elokuvan tiedot</b></label>
+<form novalidate name="movieSearchForm">
+    <p>
+      <label>Nimi</label>
+      <input type="text" ng-model="movie.name" name="uMovieName" required ng-minlength="2"><br>
+      <div ng-show="movieSearchForm.uMovieName.$invalid && movieSearchForm.uMovieName.$dirty">
+        Anna elokuvan nimi.
+      </div>
+    </p>
+    <p>
+      <label>Julkaisuvuosi</label>
+      <input type="number" ng-model="movie.release" name="uMovieRelease" required ng-pattern="/^[12]\d{3}$/"><br>
+      <div ng-show="movieSearchForm.uMovieRelease.$invalid && movieSearchForm.uMovieRelease.$dirty">
+        Anna elokuvan julkaisuvuosi.
+      </div>
+    </p>
+    <input type="submit" ng-click="searchMovie(movie)" value="Etsi" ng-disabled="movieSearchForm.$invalid">
+</form>
+<div ng-hide="hideResult">
+    <div ng-hide="movie.moviesFound">
+    Hakusanalla ei löytynyt elokuvia
+    </div>
+    <div ng-show="movie.moviesFound">
+        Haulla löytyi {{movies.length}} <span ng-pluralize count="movies.length" when="{ '0': 'elokuvaa', 'one': 'elokuva', 'other': 'elokuvaa' }"></span>
+        <ul>
+            <li ng-repeat="movie in movies">
+                <label><a ng-href="http://http://www.imdb.com/title/{{movie.imdbID}}/">{{movie.Title}}</a></label>&nbsp;<label>{{movie.Year}}</label><br>
+            </li>
+        </ul>
+    </div>
+</div>
