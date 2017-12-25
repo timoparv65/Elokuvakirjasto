@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!-- Tehtävä 46 -->
+<a href="#/"><b>Palaa etusivulle</b></a><br><br>
+<label><b>Anna sähköpostiosoite ja salasana</b></label>
+<form novalidate name="loginForm">
+    <p>
+      <label>Sähköpostiosoite</label>
+      <input type="email" ng-model="email" name="uEmail" required emailaddress><br>
+      <div ng-show="loginForm.uEmail.$invalid && loginForm.uEmail.$dirty">
+        Anna sähköpostiosoite.
+      </div>
+    </p>
+    <p>
+      <label>Salasana</label>
+      <input type="password" ng-model="password" name="uPassword" required ng-pattern="/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/"><br>
+      <div ng-show="loginForm.uPassword.$invalid && loginForm.uPassword.$dirty">
+        Anna salasana (pituus on vähintään kahdeksan merkkiä ja sisältää vähintään yhden numeron ja ison kirjaimen).
+      </div>
+    </p>
+    <input type="submit" ng-click="logIn()" value="Kirjaudu" ng-disabled="loginForm.$invalid">
+</form>
+<div>
+    <p><b>{{message}}</b></p>
+</div>

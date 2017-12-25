@@ -4,13 +4,13 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<a href="#/login"><b>Kirjaudu sisään</b></a>&nbsp;
+<!-- Tehtävä 46 -->
 <a href="#/movies/new"><b>Anna uusi elokuva</b></a>&nbsp;
 <a href="#/movies/imdb"><b>Etsi elokuvia IMDb:stä</b></a><br>
 <h1>Elokuvat</h1>
 <ul>
   <li ng-repeat="movie in movies">
-    <label>Nimi: <a ng-href="#/movies/{{movie.$id}}">{{movie.name}}</a></label><br>
+    <label>Nimi: <a ng-href="#/movies/{{movie.$id}}">{{movie.name}}</a></label>&nbsp;<button ng-click="removeMovie(movie)">Poista</button><br>
     <label>Ohjaaja: {{movie.director}}</label><br>
     <label>Julkaisuvuosi: {{movie.released}}</label><br>
     <label>Kuvaus: {{movie.description}}</label><br>

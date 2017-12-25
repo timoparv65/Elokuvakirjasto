@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-MovieLibraryApp.controller('ListMovieController', function($scope, FirebaseService){
-    //console.log("ListMovieController");  
+MovieLibraryApp.controller('ListMovieController2', function($scope, currentAuth, FirebaseService, $location){ // tehtävä 46
+    //console.log("ListMovieController2");
+    
+    if(!currentAuth){
+        $location.path('/login');
+    }
     
     $scope.movies = FirebaseService.getMovies();
     

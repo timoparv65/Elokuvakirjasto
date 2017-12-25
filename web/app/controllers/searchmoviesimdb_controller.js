@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-MovieLibraryApp.controller('SearchMoviesImdbController', function($scope, APIService, $routeParams, $location){
-    // Tehtävä 45
+//MovieLibraryApp.controller('SearchMoviesImdbController', function($scope, APIService, $location){ // Tehtävä 45
+MovieLibraryApp.controller('SearchMoviesImdbController', function($scope, currentAuth, APIService, $location){ // Tehtävä 46
     //console.log("SearchMoviesImdbController");
+    
+    if(!currentAuth){
+        $location.path('/login');
+    }
     
     $scope.movies = "";
     $scope.hideResult = true;

@@ -30,8 +30,26 @@
     <title>Elokuvakirjasto by tipa65</title>
   </head>
   <body ng-app="MovieLibraryApp">
-      <div ng-view></div>
+    <div ng-view></div>
+    <button ng-click="logOut()" ng-if="userLoggedIn">Kirjaudu ulos</button><!-- Tehtävä 46 -->
 
+    <!-- Tehtävä 46. Authentikaation vaatii Googlen uuden Auth SDK:n käyttöä -->
+    <!--
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCBMDFmWfC7Zbr_306bcC4-bfeB4r2XMZY",
+            authDomain: "my-first-app-a52e5.firebaseapp.com",
+            databaseURL: "https://my-first-app-a52e5.firebaseio.com",
+            projectId: "my-first-app-a52e5",
+            storageBucket: "my-first-app-a52e5.appspot.com",
+            messagingSenderId: "741237582288"
+        };
+        firebase.initializeApp(config);
+    </script>
+    -->
+      
     <!-- Hyödyllisiä kirjastoja -->
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-route/angular-route.min.js"></script>
@@ -45,7 +63,10 @@
     <script src="app/controllers/editmovie_controller.js"></script>
     <script src="app/controllers/showmovie_controller.js"></script>
     <script src="app/controllers/searchmoviesimdb_controller.js"></script> <!-- Tehtävä 45 -->
+    <script src="app/controllers/user_controller.js"></script> <!-- Tehtävä 46 -->
+    <script src="app/controllers/listmovie2_controller.js"></script> <!-- Tehtävä 46 -->
     <script src="app/services/firebase_service.js"></script>
     <script src="app/services/api_service.js"></script>
+    <script src="app/services/authentication_service.js"></script> <!-- Tehtävä 46 -->
   </body>
 </html>
