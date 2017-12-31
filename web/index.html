@@ -28,13 +28,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Elokuvakirjasto by tipa65</title>
-  </head>
+    <link rel="stylesheet" type="text/css" href="bootstrap-3.3.2-dist/css/bootstrap.min.css"><!-- Kpl 18.1 -->
   <body ng-app="MovieLibraryApp">
-    <div ng-view></div>
     <button ng-click="logOut()" ng-if="userLoggedIn">Kirjaudu ulos</button><!-- Tehtävä 46 -->
+    <div ng-view></div>
 
     <!-- Tehtävä 46. Authentikaation vaatii Googlen uuden Auth SDK:n käyttöä -->
-    <!--
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
     <script>
         // Initialize Firebase
@@ -48,7 +47,6 @@
         };
         firebase.initializeApp(config);
     </script>
-    -->
       
     <!-- Hyödyllisiä kirjastoja -->
     <script src="bower_components/angular/angular.min.js"></script>
@@ -56,13 +54,15 @@
     <script src="bower_components/firebase/firebase.js"></script>
     <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
 
+    <script src="js/libs/jquery/jquery.min.js"></script><!-- Kpl 18.1 -->
+    <script src="bootstrap-3.3.2-dist/js/bootstrap.min.js"></script><!-- Kpl 18.1 -->
+    
     <!-- Linkitä omat tiedostosi tähän (huomaa, että polun juuri on web-kansio!) -->
     <script src="app/app.js"></script>
     <script src="app/controllers/addmovie_controller.js"></script>
     <script src="app/controllers/listmovie_controller.js"></script>
     <script src="app/controllers/editmovie_controller.js"></script>
     <script src="app/controllers/showmovie_controller.js"></script>
-    <script src="app/controllers/searchmoviesimdb_controller.js"></script> <!-- Tehtävä 45 -->
     <script src="app/controllers/user_controller.js"></script> <!-- Tehtävä 46 -->
     <script src="app/controllers/listmovie2_controller.js"></script> <!-- Tehtävä 46 -->
     <script src="app/services/firebase_service.js"></script>

@@ -16,9 +16,8 @@ MovieLibraryApp.controller('UserController', function($scope, AuthenticationServ
             })
             .catch(function(error){
                 //console.log("AuthenticationService/logUserIn: failed");
-                // Handle Errors here.
-                //var errorCode = error.code;
-                //var errorMessage = error.message;
+                var errorCode = error.code;
+                var errorMessage = error.message;
                 //console.log(errorCode);
                 //console.log(errorMessage);
                 $scope.message = 'Väärä sähköpostiosoite tai salasana!';
@@ -37,8 +36,8 @@ MovieLibraryApp.controller('UserController', function($scope, AuthenticationServ
             })
             .catch(function(error){
                 //console.log("AuthenticationService/logUserIn: failed");
-                //var errorCode = error.code;
-                //var errorMessage = error.message;
+                var errorCode = error.code;
+                var errorMessage = error.message;
                 //console.log(errorCode);
                 //console.log(errorMessage);
                 $scope.message = 'Tapahtui virhe! Yritä uudestaan';

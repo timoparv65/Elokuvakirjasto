@@ -5,26 +5,62 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!-- Tehtävä 46 -->
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#/">Elokuvakirjasto</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav" ng-repeat="data in navbarData.urls">
-              <li class="{{navbarData.classes[$index]}}"><a href="{{navbarData.urls[$index]}}">{{navbarData.texts[$index]}}</a></li>
-          </ul>
-          <button type="button" class="btn btn-outline-success navbar-btn navbar-right my-2 my-sm-0" btn-sm ng-click="logOut()" ng-if="userLoggedIn">Kirjaudu ulos</button>
-        </div><!--/.nav-collapse -->
-    </div><!--/.container-fluid -->
-</nav>
+<button type="button" class="btn btn-outline-light" btn-sm ng-click="logIn()" ng-if="!userLoggedIn">Kirjaudu sisään</button><!-- Tehtävä 46 -->
+<!--<a href="#/login" ng-hide="userLoggedIn"><b>Kirjaudu sisään</b></a>&nbsp;-->
+<a href="#/movies/new" ng-show="userLoggedIn"><b>Anna uusi elokuva</b></a>&nbsp;
+<h2>Hae elokuvia</h2>
+<form novalidate name="movieSearchForm">
+    <p>
+      <label>Nimi</label>
+      <input type="text" ng-model="movie.name" name="uMovieName" required ng-minlength="2"><br>
+      <div ng-show="movieSearchForm.uMovieName.$invalid && movieSearchForm.uMovieName.$dirty">
+        Anna elokuvan nimi.
+      </div>
+    </p>
+    <p>
+      <label>Julkaisuvuosi</label>
+      <input type="number" ng-model="movie.release" name="uMovieRelease" required ng-pattern="/^[12]\d{3}$/"><br>
+      <div ng-show="movieSearchForm.uMovieRelease.$invalid && movieSearchForm.uMovieRelease.$dirty">
+        Anna elokuvan julkaisuvuosi.
+      </div>
+    </p>
+    <input type="submit" ng-click="searchMovie(movie)" value="Etsi" ng-disabled="movieSearchForm.$invalid">
+</form>
+<div ng-hide="hideResult">
+    <div ng-hide="movie.moviesFound">
+    Hakusanalla ei löytynyt elokuvia
+    </div>
+    <div ng-show="movie.moviesFound">
+        Haulla löytyi {{foundMovies.length}} <span ng-pluralize count="foundMovies.length" when="{ '0': 'elokuvaa', 'one': 'elokuva', 'other': 'elokuvaa' }"></span>
+        <ul>
+            <li ng-repeat="movie in foundMovies">
+                <label><a ng-href="http://http://www.imdb.com/title/{{movie.imdbID}}/">{{movie.Title}}</a></label>&nbsp;<label>{{movie.Year}}</label><br>
+            </li>
+        </ul>
+    </div>
+</div>
+<h2>Elokuvat</h2>
+<ul>
+  <li ng-repeat="movie in movies">
+    <!--<label>Nimi: <a ng-href="#/movies/{{movie.$id}}">{{movie.name}}</a></label>&nbsp;<button ng-click="removeMovie(movie)">Poista</button><br>-->
+    <label>Nimi: <a ng-href="#/movies/{{movie.$id}}">{{movie.name}}</a></label>&nbsp;<button ng-click="removeMovie(movie)" ng-show="userLoggedIn">Poista</button><br>
+    <label>Ohjaaja: {{movie.director}}</label><br>
+    <label>Julkaisuvuosi: {{movie.released}}</label><br>
+    <label>Kuvaus: {{movie.description}}</label><br>
+    <label>ID: {{movie.$id}}</label>
+  </li>
+</ul>
+
 <div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-md-8">
+
+        </div>
+        <div class="col-sm-4 col-md-4">
+            <button type="button" class="btn btn-outline-light" btn-sm ng-click="logIn()" ng-if="!userLoggedIn">Kirjaudu sisään</button><!-- Tehtävä 46 -->
+            <button type="button" class="btn btn-outline-light" btn-sm ng-click="newMovie()" ng-if="userLoggedIn">Anna uusi elokuva</button>
+        </div>
+    </div> 
     <div class="row">
         <div class="col-sm-6 col-md-6">
             <h2>Hae elokuvia</h2>
@@ -43,6 +79,10 @@ and open the template in the editor.
                       Anna elokuvan julkaisuvuosi.
                     </div>
                 </div>
+                <!--<input type="submit" ng-click="searchMovie(movie)" value="Etsi" ng-disabled="movieSearchForm.$invalid">-->
+                <!--<div class="input-group">
+                    <input type="submit" class="input-group-sm" ng-click="searchMovie(movie)" value="Etsi" ng-disabled="movieSearchForm.$invalid">
+                </div>-->
                 <button type="button" class="btn btn-primary" ng-click="searchMovie(movie)" ng-disabled="movieSearchForm.$invalid">Etsi</button>
             </form>
             <div ng-hide="hideResult">
@@ -51,6 +91,11 @@ and open the template in the editor.
                 </div>
                 <div ng-show="movie.moviesFound">
                     <h4>Haulla löytyi {{foundMovies.length}} <span ng-pluralize count="foundMovies.length" when="{ '0': 'elokuvaa', 'one': 'elokuva', 'other': 'elokuvaa' }"></span></h4>
+                    <ul>
+                        <li ng-repeat="movie in foundMovies">
+                            <label><a ng-href="http://http://www.imdb.com/title/{{movie.imdbID}}/">{{movie.Title}}</a></label>&nbsp;<label>{{movie.Year}}</label><br>
+                        </li>
+                    </ul>
                     <table class="table">
                         <thead>
                             <tr>
@@ -81,7 +126,6 @@ and open the template in the editor.
                         <th scope="col">Nimi</th>
                         <th scope="col">Ohjaaja</th>
                         <th scope="col">Julkaisuvuosi</th>
-                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,15 +133,9 @@ and open the template in the editor.
                         <td><a ng-href="#/movies/{{movie.$id}}">{{movie.name}}</a></td>
                         <td>{{movie.director}}</td>
                         <td>{{movie.released}}</td>
-                        <td><button type="button" class="btn btn-danger" ng-click="removeMovie(movie)" ng-if="userLoggedIn">Poista</button></td>
-                        <!--<td><button type="button" class="btn btn-danger" ng-click="removeMovie(movie)">Poista</button></td>-->
                     </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="col-sm-12 col-md-12">
-            <button type="button" class="btn btn-primary" ng-click="newMovie()" ng-if="userLoggedIn">Lisää uusi</button>
-            <!--<button type="button" class="btn btn-primary" ng-click="newMovie()">Lisää uusi</button>-->
         </div>
     </div>
 </div>

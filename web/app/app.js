@@ -1,4 +1,3 @@
-//var MovieLibraryApp = angular.module('MovieLibraryApp', ['firebase','ngRoute','ng']); // Toteuta moduulisi tänne
 var MovieLibraryApp = angular.module('MovieLibraryApp', ['firebase','ngRoute','ng']); // Toteuta moduulisi tänne
 
 MovieLibraryApp.config(function($routeProvider){
@@ -8,12 +7,6 @@ MovieLibraryApp.config(function($routeProvider){
         .when('/', {
             controller: 'ListMovieController',
             templateUrl: 'app/views/list.html'
-            /* Sallitaan elokuvaresurssien likeminen kaikille
-            resolve: { // tehtävä 46
-                currentAuth: function(AuthenticationService) {
-                  return AuthenticationService.checkLoggedIn();
-                }
-            }*/
         })
         .when('/login', {
             controller: 'UserController',
@@ -31,15 +24,6 @@ MovieLibraryApp.config(function($routeProvider){
         .when('/movies/new', {
             controller: 'AddMovieController',
             templateUrl: 'app/views/addForm.html',
-            resolve: { // tehtävä 46
-                currentAuth: function(AuthenticationService) {
-                  return AuthenticationService.checkLoggedIn();
-                }
-            }
-        })
-        .when('/movies/imdb', { // Tehtävä 45
-            controller: 'SearchMoviesImdbController',
-            templateUrl: 'app/views/searchForm.html',
             resolve: { // tehtävä 46
                 currentAuth: function(AuthenticationService) {
                   return AuthenticationService.checkLoggedIn();
@@ -74,11 +58,12 @@ MovieLibraryApp.config(['$httpProvider', function($httpProvider) {
     delete $httpProvider.defaults.headers.common["X-Requested-With"];
 }]);
 
-MovieLibraryApp.run(function(AuthenticationService, $rootScope){ // Tehtävä 46
+MovieLibraryApp.run(function(AuthenticationService, $rootScope, $location){ // Tehtävä 46
     //console.log("MovieLibraryApp.run(function(AuthenticationService, $rootScope){");
     $rootScope.logOut = function(){
-        //console.log("MovieLibraryApp.run(function(AuthenticationService, $rootScope){/..logOut");
+      //console.log("MovieLibraryApp.run(function(AuthenticationService, $rootScope){/..logOut");
       AuthenticationService.logUserOut();
+      $location.path('/');
     };
 
     $rootScope.userLoggedIn = AuthenticationService.getUserLoggedIn();

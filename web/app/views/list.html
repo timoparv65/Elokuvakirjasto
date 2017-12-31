@@ -4,16 +4,54 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<a href="#/login"><b>Kirjaudu sisään</b></a>&nbsp;
-<a href="#/movies/new"><b>Anna uusi elokuva</b></a>&nbsp;
-<a href="#/movies/imdb"><b>Etsi elokuvia IMDb:stä</b></a><br>
-<h1>Elokuvat</h1>
-<ul>
-  <li ng-repeat="movie in movies">
-    <label>Nimi: <a ng-href="#/movies/{{movie.$id}}">{{movie.name}}</a></label><br>
-    <label>Ohjaaja: {{movie.director}}</label><br>
-    <label>Julkaisuvuosi: {{movie.released}}</label><br>
-    <label>Kuvaus: {{movie.description}}</label><br>
-    <label>ID: {{movie.$id}}</label>
-  </li>
-</ul>
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!-- Tehtävä 46 -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/">Elokuvakirjasto</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav" ng-repeat="data in navbarData.urls">
+              <li class="{{navbarData.classes[$index]}}"><a href="{{navbarData.urls[$index]}}">{{navbarData.texts[$index]}}</a></li>
+          </ul>
+          <button type="button" class="btn btn-outline-success navbar-btn navbar-right my-2 my-sm-0" btn-sm ng-click="logIn()" ng-if="!userLoggedIn">Kirjaudu sisään</button>
+          <button type="button" class="btn btn-outline-success navbar-btn navbar-right my-2 my-sm-0" btn-sm ng-click="logOut()" ng-if="userLoggedIn">Kirjaudu ulos</button>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <h2>Elokuvat</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nimi</th>
+                        <th scope="col">Ohjaaja</th>
+                        <th scope="col">Julkaisuvuosi</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="movie in movies">
+                        <td><a ng-href="#/movies/{{movie.$id}}">{{movie.name}}</a></td>
+                        <td>{{movie.director}}</td>
+                        <td>{{movie.released}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

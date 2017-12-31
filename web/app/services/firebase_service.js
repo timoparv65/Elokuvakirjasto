@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 MovieLibraryApp.service('FirebaseService', function($firebaseArray){
+    //console.log("FirebaseService");
     // Keskustele Firebasen kanssa tämän palvelun avulla
 
     // Tehtävä 43
-    var OMA_FIREBASE = 'https://my-first-app-a52e5.firebaseio.com';
-    //var OMA_FIREBASE = config.databaseURL; // tehtävä 46
+    //var OMA_FIREBASE = 'https://my-first-app-a52e5.firebaseio.com';
+    var OMA_FIREBASE = config.databaseURL; // tehtävä 46
     var MOVIELIBRARY_OSOITE = OMA_FIREBASE.concat('/movies');
     var firebaseRef = new Firebase(MOVIELIBRARY_OSOITE);
     var movies = $firebaseArray(firebaseRef);

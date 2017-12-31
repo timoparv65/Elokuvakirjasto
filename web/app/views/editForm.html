@@ -4,35 +4,64 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<label><b>Muokkaa elokuvan tietoja</b></label>
-<form novalidate name="movieForm">
-    <p>
-      <label>Nimi</label>
-      <input type="text" ng-model="movie.name" name="uMovieName" required ng-minlength="2"><br>
-      <div ng-show="movieForm.uMovieName.$invalid && movieForm.uMovieName.$dirty">
-        Anna elokuvan nimi.
-      </div>
-    </p>
-    <p>
-    <label>Ohjaaja</label>
-      <input type="text" ng-model="movie.director" name="uMovieDirector" required ng-pattern="/^\D{2,}$/"><br>
-      <div ng-show="movieForm.uMovieDirector.$invalid && movieForm.uMovieDirector.$dirty">
-        Anna elokuvan ohjaajan nimi.
-      </div>
-    </p>
-    <p>
-      <label>Julkaisuvuosi</label>
-      <input type="number" ng-model="movie.released" name="uMoviePublished" required ng-pattern="/^[12]\d{3}$/"><br>
-      <div ng-show="movieForm.uMoviePublished.$invalid && movieForm.uMoviePublished.$dirty">
-        Anna elokuvan julkaisuvuosi.
-      </div>
-    </p>
-    <p>
-      <label>Kuvaus</label>
-      <input type="text" ng-model="movie.description" name="uMovieDescription" required ng-minlength="2"><br>
-      <div ng-show="movieForm.uMovieDescription.$invalid && movieForm.uMovieDescription.$dirty">
-        Anna elokuvan kuvaus.
-      </div>
-    </p>
-    <input type="submit" ng-click="editMovie(movie)" value="Tallenna" ng-disabled="movieForm.$invalid">
-</form>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/">Elokuvakirjasto</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav" ng-repeat="data in navbarData.urls">
+              <li class="{{navbarData.classes[$index]}}"><a href="{{navbarData.urls[$index]}}">{{navbarData.texts[$index]}}</a></li>
+          </ul>
+          <button type="button" class="btn btn-outline-success navbar-btn navbar-right my-2 my-sm-0" btn-sm ng-click="logOut()" ng-if="userLoggedIn">Kirjaudu ulos</button>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <h1>Muokkaa elokuvaa "{{movie.name}}"</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <form novalidate name="movieForm2">
+                <div class="form-group">
+                    <label for="uMovieName2">Nimi</label>
+                    <input type="text" class="form-control" ng-model="movie.name" name="uMovieName2" id="uMovieName2" required ng-minlength="2"><br>
+                    <div ng-show="movieForm2.uMovieName2.$invalid && movieForm2.uMovieName2.$dirty">
+                      Anna elokuvan nimi.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="uMovieDirector2">Ohjaaja</label>
+                    <input type="text" class="form-control" ng-model="movie.director" name="uMovieDirector2" id="uMovieDirector2" required ng-pattern="/^\D{2,}$/"><br>
+                    <div ng-show="movieForm2.uMovieDirector2.$invalid && movieForm2.uMovieDirector2.$dirty">
+                      Anna elokuvan ohjaajan nimi.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="uMovieReliesed">Julkaisuvuosi</label>
+                    <input type="number" class="form-control" ng-model="movie.released" name="uMovieReliesed" id="uMovieReliesed" required ng-pattern="/^[12]\d{3}$/"><br>
+                    <div ng-show="movieForm2.uMovieReliesed.$invalid && movieForm2.uMovieReliesed.$dirty">
+                      Anna elokuvan julkaisuvuosi.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="uMovieDescription2">Kuvaus</label>
+                    <input type="text" class="form-control" ng-model="movie.description" name="uMovieDescription2" id="uMovieDescription2" required ng-minlength="2"><br>
+                    <div ng-show="movieForm2.uMovieDescription2.$invalid && movieForm2.uMovieDescription2.$dirty">
+                      Anna elokuvan kuvaus.
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" ng-click="editMovie(movie)">Tallenna</button>
+            </form>
+        </div>
+    </div>
+</div>

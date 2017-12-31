@@ -3,8 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-MovieLibraryApp.controller('EditMovieController', function($scope, FirebaseService, $routeParams, $location){
+MovieLibraryApp.controller('EditMovieController', function($scope, currentAuth, FirebaseService, $routeParams, $location){ // tehtävä 46
     //console.log("EditMovieController");
+    
+    if(!currentAuth){
+        $location.path('/login');
+    }
+    
+    $scope.navbarData = {
+        urls:['#/movies'],
+        texts:['Elokuvat'],
+        classes:['active']
+    };
+    
     FirebaseService.getMovie($routeParams.key, function(movie){
         //console.log("EditMovieController/FirebaseService.getMovie");
         $scope.movie = movie;

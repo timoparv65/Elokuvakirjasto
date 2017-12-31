@@ -3,13 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//MovieLibraryApp.controller('AddMovieController', function($scope, FirebaseService, $location){
 MovieLibraryApp.controller('AddMovieController', function($scope, currentAuth, FirebaseService, $location){ // Tehtävä 46
     //console.log("AddMovieController");
     
     if(!currentAuth){
         $location.path('/login');
     }
+    
+    $scope.navbarData = {
+        urls:['#/movies'],
+        texts:['Elokuvat'],
+        classes:['active']
+    };
     
     $scope.addMovie = function(movie){
         //console.log("AddMovieController/addMovie");
@@ -25,5 +30,5 @@ MovieLibraryApp.controller('AddMovieController', function($scope, currentAuth, F
             FirebaseService.addMovie(movieJson);
             $location.path('/movies');
         }
-    }
+    };
 });

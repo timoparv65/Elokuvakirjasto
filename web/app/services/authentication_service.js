@@ -7,17 +7,13 @@
 MovieLibraryApp.service('AuthenticationService', function($firebaseAuth){
     //console.log("AuthenticationService");
     
-    var OMA_FIREBASE = 'https://my-first-app-a52e5.firebaseio.com';
+    //var OMA_FIREBASE = 'https://my-first-app-a52e5.firebaseio.com';
+    var OMA_FIREBASE = config.databaseURL; // tehtävä 46
     var firebaseRef = new Firebase(OMA_FIREBASE);
     var firebaseAuth = $firebaseAuth(firebaseRef);
 
     this.logUserIn = function(email, password){
         //console.log("AuthenticationService/logUserIn");
-        //console.log("email");
-        //console.log(email);
-        //console.log("password");
-        //console.log(password);
-        
         return firebaseAuth.$authWithPassword({
             email: email,
             password: password
@@ -28,11 +24,6 @@ MovieLibraryApp.service('AuthenticationService', function($firebaseAuth){
 
     this.createUser = function(email, password){
         //console.log("AuthenticationService/createUser");
-        //console.log("email");
-        //console.log(email);
-        //console.log("password");
-        //console.log(password);
-        
         return firebaseAuth.$createUser({
             email: email,
             password: password
@@ -55,6 +46,7 @@ MovieLibraryApp.service('AuthenticationService', function($firebaseAuth){
     this.getUserLoggedIn = function(){
         //console.log("AuthenticationService/getUserLoggedIn");
         return firebaseAuth.$getAuth();
+        //return firebase.auth().currentUser;
     };
 });
 

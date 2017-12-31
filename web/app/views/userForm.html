@@ -5,25 +5,72 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!-- Tehtävä 46 -->
-<a href="#/"><b>Palaa etusivulle</b></a><br><br>
-<label><b>Anna sähköpostiosoite ja salasana</b></label>
-<form novalidate name="loginForm">
-    <p>
-      <label>Sähköpostiosoite</label>
-      <input type="email" ng-model="email" name="uEmail" required emailaddress><br>
-      <div ng-show="loginForm.uEmail.$invalid && loginForm.uEmail.$dirty">
-        Anna sähköpostiosoite.
-      </div>
-    </p>
-    <p>
-      <label>Salasana</label>
-      <input type="password" ng-model="password" name="uPassword" required ng-pattern="/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/"><br>
-      <div ng-show="loginForm.uPassword.$invalid && loginForm.uPassword.$dirty">
-        Anna salasana (pituus on vähintään kahdeksan merkkiä ja sisältää vähintään yhden numeron ja ison kirjaimen).
-      </div>
-    </p>
-    <input type="submit" ng-click="logIn()" value="Kirjaudu" ng-disabled="loginForm.$invalid">
-</form>
-<div>
-    <p><b>{{message}}</b></p>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/">Elokuvakirjasto</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <button type="button" class="btn btn-outline-success navbar-btn navbar-right my-2 my-sm-0" btn-sm ng-click="logOut()" ng-if="!userLoggedIn">Kirjaudu ulos</button>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-3"></div>
+        <div class="col-sm-6 col-md-6">
+            <h3 style="color:Tomato;">{{message}}</h3>
+        </div>
+        <div class="col-sm-3 col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <h2>Kirjaudu sisään</h2>
+            <form novalidate name="logInForm">
+                <div class="form-group">
+                    <label for="uEmail">Sähköpostiosoite</label>
+                    <input type="email" class="form-control" ng-model="email" name="uEmail" id="uEmail" required emailaddress><br>
+                    <div ng-show="logInForm.uEmail.$invalid && logInForm.uEmail.$dirty">
+                        Anna sähköpostiosoite.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="uPassword">Salasana</label>
+                    <input type="password" class="form-control" ng-model="password" name="uPassword" id="uPassword" required ng-pattern="/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/"><br>
+                    <div ng-show="logInForm.uPassword.$invalid && logInForm.uPassword.$dirty">
+                        Anna salasana (pituus on vähintään kahdeksan merkkiä ja sisältää vähintään yhden numeron ja ison kirjaimen).
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" ng-click="logIn()" ng-disabled="logInForm.$invalid">Kirjaudu</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <h2>Rekisteröidy</h2>
+            <form novalidate name="registerForm">
+                <div class="form-group">
+                    <label for="uNewEmail">Sähköpostiosoite</label>
+                    <input type="email" class="form-control" ng-model="newEmail" name="uNewEmail" id="uNewEmail" required emailaddress><br>
+                    <div ng-show="registerForm.uNewEmail.$invalid && registerForm.uNewEmail.$dirty">
+                        Anna sähköpostiosoite.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="uNewPassword">Salasana</label>
+                    <input type="password" class="form-control" ng-model="newPassword" name="uNewPassword" id="uNewPassword" required ng-pattern="/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/"><br>
+                    <div ng-show="registerForm.uNewPassword.$invalid && registerForm.uNewPassword.$dirty">
+                        Anna salasana (pituus on vähintään kahdeksan merkkiä ja sisältää vähintään yhden numeron ja ison kirjaimen).
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" ng-click="register()" ng-disabled="registerForm.$invalid">Kirjaudu</button>
+            </form>
+        </div>
+    </div>
 </div>
